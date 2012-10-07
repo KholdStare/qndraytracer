@@ -1,3 +1,6 @@
+## Quick 'n' Dirty Raytracer
+![Cornell Box](https://github.com/KholdStare/qndraytracer/raw/master/images/cornell_box.bmp)
+
 ### Description
 
 This is a project of mine that grew out of a universty assignment.
