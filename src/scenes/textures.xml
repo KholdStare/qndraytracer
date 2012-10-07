@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <!-- renderer settings -->
+        <bounces diffuse="2" specular="6" />
+        <samples light="9" diffuse="16" />
+    </settings>
+    <images>
+        <!-- images that can be used as textures -->
+        <image name="jupiter" path="jupiter.bmp" />
+    </images>
+    <textures>
+        <!-- textures that can be referenced in material properties -->
+        <texture name="checker" data="Colour" type="CheckerTexture" checkersPerSide="6">
+            <first r="1" g="1" b="1" />
+        </texture>
+        <texture name="jupiter" data="Colour" type="ImageTexture" image="jupiter" />
+        <texture name="checker" data="double" type="CheckerTexture" checkersPerSide="3">
+            <first val="0.9" />
+        </texture>
+        <texture name="redchecker" data="Colour" type="CheckerTexture" checkersPerSide="6">
+            <first r="1" g="0" b="0" />
+        </texture>
+    </textures>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "white">
+            <ambient     val="0.03"/>
+            <diffuse     r="0.9" g="0.9" b="0.9" />
+        </material>
+        <material name= "checker">
+            <ambient     val="0.03"/>
+            <diffuse     texture="checker" />
+        </material>
+        <material name= "planet">
+            <ambient     val="0.03"/>
+            <diffuse     texture="jupiter" />
+        </material>
+        <material name= "red">
+            <ambient     val="0.03"/>
+            <diffuse     r="0.9" g="0.01" b="0.01" />
+        </material>
+        <material name= "green">
+            <ambient     val="0.03"/>
+            <diffuse     r="0.01" g="0.9" b="0.01" />
+            <!--<reflectance     texture="checker" />-->
+        </material>
+        <material name= "glow">
+            <emittance   r="2.0" g="1.2" b="1"/>
+            <!--<emittance   r="16.0" g="13.6" b="7" />-->
+        </material>
+        <material name= "glass">
+            <refraction index="1.1" transmissive="true" />
+            <absorption r="0.3" g="0.3" b="1" />
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="texture_test" gamma="1.6" fov="40" width="640" height="640" >
+            <samples aperture="9" antialias="4" />
+            <!-- aperture of 0 means pinhole camera -->
+            <lens aperture="0" focalDistance="3.3" />
+            <eye z="7.5"/>
+            <view z="-1.0" />
+            <up  y="1.0" />
+        </camera>
+    </cameras>
+    <lights>
+        <light type="PointLight" x="-1.5" y="1.5" z="5" >
+            <colour val="0.4"/>
+        </light>
+        <light type="PointLight" x="1" y="1.5" z="3" >
+            <colour val="0.3"/>
+        </light>
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node>
+        <description>Center of box</description>
+        <translate x="-0.5" y="1" z="2" />
+        <scale x="4.0" z="10" y="3" />
+        <!--<node shape="UnitSquare" material="glow" >
+            <translate y="0.499" />
+            <scale val="0.25" />
+            <rotate axis="x" angle="90"/>
+        </node>-->
+        <node shape="UnitSquare" material="white" >
+            <description>Floor</description>
+            <rotate axis="x" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Ceiling</description>
+            <rotate axis="x" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Back Wall</description>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="red" >
+            <description>Left Wall</description>
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="green" >
+            <description>Right Wall</description>
+            <rotate axis="y" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+    </node>
+    <node>
+        <description>Start of spheres</description>
+        <translate x="0.2" y="-0.5" z="1" />
+        <rotate axis="y" angle="-8"/>
+        <scale val="0.25" />
+        <translate y="1" />
+        <node shape="UnitSphere" material="white" />
+        <node shape="UnitSphere" material="red" >
+            <translate z="4" />
+        </node>
+        <node shape="UnitSphere" material="green" >
+            <translate z="8" />
+        </node>
+        <node shape="UnitCube" material="white" >
+            <translate z="12" />
+        </node>
+        <node shape="UnitSphere" material="green" >
+            <translate z="16" />
+            <rotate axis="x" angle="-90"/>
+        </node>
+        <node shape="UnitSphere" material="red" >
+            <translate z="20" />
+        </node>
+    </node>
+    <node shape="UnitSphere" material="planet" >
+        <translate y="1.2" z="0" />
+        <rotate axis="x" angle="-90"/>
+    </node>
+</scene>

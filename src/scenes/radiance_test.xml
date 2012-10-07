@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<scene>
+    <description>Tests the sampling of a spherical area light source.
+Specifically, whether a sphere touching it is of the correct brightness.
+    </description>
+    <settings>
+        <!-- renderer settings -->
+        <output gamma="1.6" />
+        <samples lights="9" />
+    </settings>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "white">
+            <ambient     val="0.0"/>
+            <diffuse     val="1.0"/>
+            <specular    val="0.0" exponent="1.0"/>
+        </material>
+        <material name= "glow">
+            <emittance  val="1.0" />
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="radiance_test" fov="60" width="640" height="480" >
+            <samples antialias="16" />
+            <eye x="0.0" y="0.0" z="6.0" />
+            <view x="0.0" y="0.0" z="-1.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+    </cameras>
+    <lights>
+        <!-- put point lights here -->
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node shape="UnitSquare" material="white" >
+        <rotate axis="x" angle="-90"/>
+        <translate x="0.0" y="0.0" z="-2.0" />
+        <scale val="20.0" />
+    </node>
+    <!-- spherical light source -->
+    <node shape="UnitSphere" material="glow" >
+        <translate x="0.0" y="1.0" z="0.0" />
+    </node>
+    <!-- perfectly diffuse object -->
+    <node shape="UnitSphere" material="white" >
+        <translate x="0.0" y="-1.0" z="0.0" />
+    </node>
+</scene>

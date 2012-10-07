@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <!-- renderer settings -->
+        <output gamma="2.2" dumpRaw="true" />
+        <bounces diffuse="2" specular="3" />
+        <samples light="4" diffuse="9" />
+    </settings>
+    <meshes>
+        <mesh name="dragon" path="mesh/dragon.obj" smoothNormals="false" />
+    </meshes>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "white">
+            <ambient     val="0.03"/>
+            <diffuse     val="0.95"/>
+        </material>
+        <material name= "red">
+            <ambient     val="0.03"/>
+            <diffuse     r="0.9" g="0.01" b="0.01"/>
+        </material>
+        <material name= "green">
+            <ambient     val="0.03"/>
+            <diffuse     r="0.01" g="0.9" b="0.01"/>
+        </material>
+        <material name= "orange">
+            <ambient     val="0.03"/>
+            <specular    r="0.9" g="0.7" b="0.1" exponent="5" />
+            <diffuse     r="0.9" g="0.4" b="0.1"/>
+        </material>
+        <material name= "glow">
+            <emittance   r="2.0" g="0.5" b="0.05"/>
+            <!--<emittance   r="16.0" g="13.6" b="7" />-->
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="dragon" fov="30" width="640" height="640" >
+            <!-- aperture of 0 means pinhole camera -->
+            <samples aperture="4" antialias="4" />
+            <lens aperture="0.04" focalDistance="3" />
+            <eye y="1.2" z="7.5"/>
+            <view y="-0.3" z="-1.0" />
+            <up  y="1.0" />
+        </camera>
+    </cameras>
+    <lights>
+        <light type="PointLight" y="1.5" >
+            <colour val="0.3"/>
+        </light>
+        <light type="PointLight" x="1" y="1.5" z="5" >
+            <colour val="0.3"/>
+        </light>
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node>
+        <description>Center of box</description>
+        <translate y="1" z="2" />
+        <scale x="4.0" z="10" y="3" />
+        <node shape="UnitSquare" material="white" >
+            <description>Floor</description>
+            <rotate axis="x" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Ceiling</description>
+            <rotate axis="x" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Back Wall</description>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="red" >
+            <description>Left Wall</description>
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="green" >
+            <description>Right Wall</description>
+            <rotate axis="y" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+    </node>
+    <node mesh="dragon" material="orange" >
+        <translate x="0.15" y="-1.05" z="4" />
+        <rotate axis="y" angle="50"/>
+        <scale val="10" />
+    </node>
+</scene>

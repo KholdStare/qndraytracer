@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <!-- renderer settings -->
+    </settings>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "grey">
+            <ambient     val="0.3"/>
+            <diffuse     val="0.95"/>
+            <specular    val="0.15" exponent="100"/>
+        </material>
+        <material name= "red">
+            <ambient     val="0.3"/>
+            <diffuse     r="0.9" g="0.01" b="0.01"/>
+            <specular    val="1.0" exponent="100"/>
+        </material>
+        <material name= "glow">
+            <emittance   r="4.0" g="3.4" b="3"/>
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="bleed_test" fov="60" width="640" height="480" antialiasing="true" >
+            <eye x="0.0" y="0.0" z="4.0"/>
+            <view x="0.0" y="0.0" z="-1.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+    </cameras>
+    <lights>
+        <!-- put point lights here -->
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node shape="UnitSquare" material="grey" >
+        <rotate axis="x" angle="-90"/>
+        <translate x="0.0" y="0.0" z="-1.0" />
+        <scale val="6.0" pointx="0.0" pointy="0.0" pointz="0.0" />
+    </node>
+    <node shape="UnitSquare" material="red" >
+        <rotate axis="y" angle="-90"/>
+        <translate x="0.0" y="0.0" z="-1.0" />
+        <scale val="6.0" pointx="0.0" pointy="0.0" pointz="0.0" />
+    </node>
+    <node shape="UnitSquare" material="red" >
+        <rotate axis="x" angle="-90"/>
+        <translate x="0.0" y="0.0" z="-0.5" />
+    </node>
+    <node shape="UnitSphere" material="glow" >
+        <scale val="0.5" pointx="0.0" pointy="0.0" pointz="0.0" />
+    </node>
+</scene>

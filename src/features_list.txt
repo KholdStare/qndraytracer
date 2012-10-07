@@ -1,0 +1,42 @@
+- Multithreading using OpenMP
+    raytracer.cpp render()
+    - also, thread independent random number generation in threadrand.h
+
+- Stratified sampling using iterators
+    iterator/stratified_iterator.hpp
+
+- Antialiasing using stratified sampling
+    camera.cpp, computePixel()
+
+- DOF using stratified sampling of circle aperture
+    camera.cpp, sampleLens()
+
+- XML Scene definition
+    xml_util.h xml parsing code using tinyxml library
+    scenes/ folder contains a bunch of sample scene xml files
+
+- Bounding volumes
+    bounding_volume.h Abstract class definition and some implementations
+    Can be used to check intersection in world space before actually
+    intersecting the objects
+
+- Lighting volumes
+    light_volume.h defines abstract class and sphere bounding volume for
+                   lighting
+    Can be used to bound an object for the pruposes of light sampling
+    provides methods to check the probability of rays subtended by the volume,
+    relative to a hemisphere of angles at a point. Used within the multiple
+    importance sampling framework.
+
+- Refraction
+    fresnel.h A class for vector and coefficient calculations related to
+              refraction
+    raytracer.cpp shadeRay() function implements refraction
+
+- Meshes, OBJ file parsing, and KD-tree acceleration
+    mesh/obj_store.h for obj representation
+    mesh/obj_parse.h for obj parsing
+    mesh/mesh.h for mesh SceneObject
+    kdtree/kd_tree.h for KD-tree implementation
+
+

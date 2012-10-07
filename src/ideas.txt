@@ -1,0 +1,42 @@
+Bidirectional path-tracing data structure ideas.
+
+store intersection structs in some kind of list. can deduce directions at each vertex easily
+
+
+Sampling ideas
+
+What if each object has a bounding volume, which is easy to sample from directionally ( has a known projection onto a hemisphere).
+Then we have unified framework for sampling any kind of light source, as long as it has a bounding volume.
+
+define 3 simple primitives that can be used to bound an object space -
+    unit square,
+    sphere,
+    box.
+
+These will be warped when transformed into world space, and it will be easier to work with symmetric shapes.
+So, an object in object space can specify it's preferred bounding volume in object space, which we then bound again in world space with a simpler shape.
+So a squished egg bounding volume in world space will be bound by a sphere with diameter that of the longest component of the egg.
+
+Thus, we need to somehow analyze how these primitives are warped in world. Ideas:
+    - eigen decomposition of 3x3 transformation (of modelToWorld) to find largest principal component?
+    - use this to inform the largest length within the bounding volume (like diameter for sphere).
+    - do this preprocessing at each frame in preprocess() 
+
+Ended up just using the largest scaling factor to inform the size of the bounding volume.
+Not as effective as eigen values in all cases, but optimal in most.
+
+Seems to be working!
+Looks bland, but seems to be a function of brdf.
+
+Next step is to generalize to multiple importance sampling.
+Need to have some kind of list of sampling strategies, that can be looped over, and each can be queried for the probability of a certain direction ( to be used in the balance heuristic)
+Before a frame is rendered in render(), this list is filled up with the appropriate strategies that have been selected ( allows to neglect environment sampling or light sampling etc.)
+
+
+
+For textures have an order of object ownership:
+image->texture->property of material->object
+Note a single image can be used for several textures, single texture for several material properties, and so on.
+
+
+Need to keep calculation in linear space, so need input and output gamma

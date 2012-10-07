@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <!-- renderer settings -->
+        <output sceneSignature="false" />
+        <bounces diffuse="1" specular="3" />
+    </settings>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "gold">
+            <ambient     val="0.3"/>
+            <diffuse     r="0.75164" g="0.60648" b="0.22648"/>
+            <specular    r="0.628281" g="0.555802" b="0.366065" exponent="51.2"/>
+        </material>
+        <material name= "jade">
+            <ambient     val="0.0"/>
+            <diffuse     r="0.54" g="0.89" b="0.63" />
+            <specular    r="0.316228" g="0.316228" b="0.316228" exponent="12.8"/>
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="view1" fov="60" width="320" height="240" >
+            <samples antialias="16" />
+            <eye x="0.0" y="0.0" z="1.0"/>
+            <view x="0.0" y="0.0" z="-1.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+        <camera name="view2" fov="60" width="320" height="240" >
+            <eye x="4.0" y="2.0" z="1.0"/>
+            <view x="-4.0" y="-2.0" z="-6.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+    </cameras>
+    <lights>
+        <!-- put point lights here -->
+        <light type="PointLight" x="0.0" y="0.0" z="5.0">
+            <colour val="0.9"/>
+        </light>
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node shape="UnitSphere" material="gold" >
+        <translate x="0.0" y="0.0" z="-5.0" />
+        <rotate axis="x" angle="-45"/>
+        <rotate axis="z" angle="45"/>
+        <scale x="1.0" y="2.0" z="1.0" />
+    </node>
+    <node shape="UnitSquare" material="jade" >
+        <translate x="0.0" y="0.0" z="-7.0" />
+        <rotate axis="z" angle="45"/>
+        <scale val="6.0" />
+    </node>
+</scene>

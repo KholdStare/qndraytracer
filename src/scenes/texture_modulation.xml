@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <!-- renderer settings -->
+        <output dumpRaw="true" gamma="2.2" />
+        <bounces diffuse="2" specular="6" />
+        <samples light="4" diffuse="9" />
+    </settings>
+    <images>
+        <!-- images that can be used as textures -->
+        <image name="jupiter" path="jupiter.bmp" />
+    </images>
+    <textures>
+        <!-- textures that can be referenced in material properties -->
+        <texture name="jupiter" data="Colour" type="ImageTexture" image="jupiter" />
+        <texture name="small checker" data="Colour" type="CheckerTexture" checkersPerSide="3" >
+            <first  val="0.9" />
+            <second val="0.1" />
+        </texture>
+        <texture name="checker" data="Colour" type="CheckerTexture" checkersPerSide="8" >
+            <first  val="0.9" />
+            <second val="0.1" />
+        </texture>
+        <texture name="inverse checker" data="Colour" type="CheckerTexture" checkersPerSide="8" >
+            <first  val="0.1" />
+            <second val="0.9" />
+        </texture>
+        <texture name="value checker" data="double" type="CheckerTexture" checkersPerSide="3" >
+            <first  val="0.9" />
+            <second val="0.1" />
+        </texture>
+    </textures>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "jupiter">
+            <diffuse     texture="jupiter" />
+        </material>
+        <material name= "diffuse checker">
+            <diffuse     texture="small checker" />
+        </material>
+        <material name= "specular checker">
+            <diffuse     r="0.01" g="0.9" b="0.01" />
+            <specular     texture="small checker" exponent="5" />
+        </material>
+        <material name= "reflective checker">
+            <diffuse     r="0.01" g="0.9" b="0.01" />
+            <reflectance     texture="value checker" />
+        </material>
+        <material name= "emissive checker">
+            <emittance     texture="small checker" />
+        </material>
+        <material name= "tiled floor">
+            <diffuse     texture="inverse checker" />
+            <specular    texture="checker" exponent="4" />
+        </material>
+        <material name= "white">
+            <diffuse     r="0.9" g="0.9" b="0.9" />
+        </material>
+        <material name= "red">
+            <diffuse     r="0.9" g="0.01" b="0.01" />
+        </material>
+        <material name= "green">
+            <diffuse     r="0.01" g="0.9" b="0.01" />
+        </material>
+        <material name= "blue">
+            <diffuse     r="0.1" g="0.01" b="0.8" />
+        </material>
+        <material name= "glow">
+            <emittance   r="16.0" g="13.6" b="7" />
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="texture_showcase" fov="40" width="1280" height="720" >
+            <samples aperture="9" antialias="4" />
+            <!-- aperture of 0 means pinhole camera -->
+            <lens aperture="0" focalDistance="3.3" />
+            <eye z="7.5"/>
+            <view z="-1.0" />
+            <up  y="1.0" />
+        </camera>
+    </cameras>
+    <lights>
+        <light type="PointLight" x="-4" y="2" z="0" >
+            <colour val="0.1"/>
+        </light>
+        <light type="PointLight" x="0" y="2" z="5" >
+            <colour val="0.1"/>
+        </light>
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node>
+        <description>Center of box</description>
+        <scale x="9.7777778" y="5.5" z="5.5"/>
+        <translate z="-0.5" />
+        <node shape="UnitSquare" material="tiled floor" >
+            <description>Floor</description>
+            <rotate axis="x" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Ceiling</description>
+            <rotate axis="x" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Back Wall</description>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="red" >
+            <description>Left Wall</description>
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="green" >
+            <description>Right Wall</description>
+            <rotate axis="y" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+    </node>
+    <node>
+        <description>Center of box</description>
+        <scale val="5.5" />
+        <translate z="-0.5" />
+        <!--
+        <node shape="UnitSquare" material="glow" >
+            <description>Ceiling light</description>
+            <translate y="0.499" />
+            <scale val="0.25" />
+            <rotate axis="x" angle="90"/>
+        </node>
+        -->
+        <node shape="UnitSphere" material="diffuse checker" >
+            <translate x="-0.15" y="-0.5" z="0.1" />
+            <scale val="0.1" />
+            <translate y="1" />
+            <rotate axis="y" angle="-20"/>
+            <rotate axis="x" angle="-120"/>
+        </node>
+        <node shape="UnitSphere" material="specular checker" >
+            <translate x="0.15" y="-0.5" z="0.1" />
+            <scale val="0.1" />
+            <translate y="1" />
+            <rotate axis="y" angle="-20"/>
+            <rotate axis="x" angle="-120"/>
+        </node>
+        <node shape="UnitSphere" material="emissive checker" >
+            <translate x="0.55" y="-0.5" z="0.1" />
+            <scale val="0.2" />
+            <translate y="1" />
+            <rotate axis="y" angle="-20"/>
+            <rotate axis="x" angle="-120"/>
+        </node>
+        <node shape="UnitSphere" material="reflective checker" >
+            <translate x="0.0" y="0" z="0.1" />
+            <scale val="0.25" />
+            <rotate axis="y" angle="-20"/>
+            <rotate axis="x" angle="-120"/>
+        </node>
+        <node shape="UnitSphere" material="jupiter" >
+            <description>Jupiter</description>
+            <translate x="-0.55" y="-0.5" z="0.1" />
+            <scale val="0.2" />
+            <translate y="1" />
+            <rotate axis="y" angle="45"/>
+            <rotate axis="x" angle="-120"/>
+        </node>
+    </node>
+</scene>

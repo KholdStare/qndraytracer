@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <output dumpRaw="false" />
+        <!-- renderer settings -->
+        <bounces diffuse="1" specular="3" />
+        <samples light="4" diffuse="9" />
+    </settings>
+    <meshes>
+        <mesh name="lo res bunny" path="mesh/bunny2.obj" blendNormals="true" />
+        <mesh name="bunny" path="mesh/bunny.obj" blendNormals="true" />
+    </meshes>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "white">
+            <ambient     val="0.3"/>
+            <diffuse     val="0.95"/>
+            <specular    val="0.15" exponent="100"/>
+        </material>
+        <material name= "red">
+            <ambient     val="0.3"/>
+            <diffuse     r="0.9" g="0.01" b="0.01"/>
+            <specular    val="1.0" exponent="100"/>
+        </material>
+        <material name= "green">
+            <ambient     val="0.3"/>
+            <diffuse     r="0.01" g="0.9" b="0.01"/>
+            <specular    val="1.0" exponent="100"/>
+        </material>
+        <material name= "glow">
+            <emittance   r="8.0" g="6.8" b="3.5"/>
+            <!--<emittance   r="16.0" g="13.6" b="7" />-->
+        </material>
+        <material name= "glass">
+            <refraction index="1.53" transmissive="true" />
+            <absorption r="0.3" g="0.3" b="1" />
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="bunny_glow" gamma="1.6" fov="40" width="640" height="640" >
+            <!-- aperture of 0 means pinhole camera -->
+            <samples antialias="1" />
+            <lens aperture="0" focalDistance="3" />
+            <eye z="2"/>
+            <view z="-1.0" />
+            <up  y="1.0" />
+        </camera>
+    </cameras>
+    <lights>
+        <!-- put point lights here ->
+        <light type="PointLight" z="1" y="0.3" >
+            <colour val="0.5"/>
+        </light>
+        -->
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <node>
+        <description>Center of box</description>
+        <!--
+        <node shape="UnitSquare" material="glow" >
+            <translate y="0.499" />
+            <scale val="0.25" />
+            <rotate axis="x" angle="90"/>
+        </node>
+        -->
+        <node mesh="bunny" material="white" >
+            <translate x="-0.07" y="-0.639" z="-0.1" />
+            <rotate axis="y" angle="30"/>
+            <scale  val="4" />
+        </node>
+        <node mesh="bunny" material="glow" >
+            <translate x="0.3" y="-0.57" z="0.2" />
+            <rotate axis="y" angle="10"/>
+            <scale val="2" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Floor</description>
+            <rotate axis="x" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Ceiling</description>
+            <rotate axis="x" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="white" >
+            <description>Back Wall</description>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="red" >
+            <description>Left Wall</description>
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="green" >
+            <description>Right Wall</description>
+            <rotate axis="y" angle="-90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+    </node>
+</scene>

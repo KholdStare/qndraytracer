@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<scene>
+    <settings>
+        <output gamma="1.6" />
+        <!-- renderer settings -->
+        <bounces diffuse="1" specular="3" />
+        <samples light="4" diffuse="9" />
+    </settings>
+    <materials>
+        <!-- materials that can be referenced in the scene nodes -->
+        <material name= "gold">
+            <ambient     val="0.3"/>
+            <diffuse     r="0.75164" g="0.60648" b="0.22648"/>
+            <specular    r="0.628281" g="0.555802" b="0.366065" exponent="51.2"/>
+        </material>
+        <material name= "jade">
+            <ambient     val="0.0"/>
+            <diffuse     r="0.54" g="0.89" b="0.63" />
+            <specular    r="0.316228" g="0.316228" b="0.316228" exponent="12.8"/>
+        </material>
+        <material name="red">
+            <ambient val="0.3" />
+            <diffuse r="0.85164" g="0.15648" b="0.22648" /> 
+            <specular val="0.15" exponent="100.1" />
+        </material>
+        <material name="green">
+            <ambient val="0.3" />
+            <diffuse r="0.15648" g="0.85164" b="0.22648" /> 
+            <specular val="0.15" exponent="100.1" />
+        </material>
+        <material name="mirrorMat">
+            <ambient val="0.3"  />
+            <diffuse r="0.75164" g="0.60648" b="0.22648" /> 
+            <specular r="0.628281" g="0.555802" b="0.366065" exponent="51.2" />
+            <reflectance val="0.9" />
+        </material>
+        <material name= "glow">
+            <emittance   val="8.0" />
+        </material>
+    </materials>
+    <cameras>
+        <!-- place all cameras to be rendered with individual settings -->
+        <camera name="mirror1" fov="60" width="640" height="480" >
+            <samples antialias="9" />
+            <eye x="0.0" y="0.0" z="4.0"/>
+            <view x="0.0" y="0.0" z="-1.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+        <camera name="mirror2" fov="60" width="640" height="480" >
+            <samples antialias="9" />
+            <eye x="6.0" y="3.0" z="4.0"/>
+            <view x="-4.0" y="-2.0" z="-6.0"/>
+            <up x="0.0" y="1.0" z="0.0"/>
+        </camera>
+    </cameras>
+    <lights>
+        <!-- put point lights here -->
+    </lights>
+    <!-- All nodes at this level will be attached to the root node -->
+    <!-- center egg -->
+    <node shape="UnitSphere" material="gold" >
+        <translate x="0.0" y="0.0" z="-5.0" />
+        <rotate axis="x" angle="-45"/>
+        <rotate axis="z" angle="45"/>
+        <scale x="1.0" y="2.0" z="1.0" />
+    </node>
+    <!-- main plane -->
+    <node shape="UnitSquare" material="jade" >
+        <translate x="0.0" y="0.0" z="-7.0" />
+        <rotate axis="z" angle="45"/>
+        <scale val="20.0" />
+    </node>
+    <!-- emitting spheres -->
+    <node shape="UnitSphere" material="glow" >
+        <translate x="-4.0" y="2.0" z="-4.0" />
+        <scale val="0.5" />
+    </node>
+    <node shape="UnitSphere" material="glow" >
+        <translate x="0" y="0" z="5" />
+        <scale val="0.5" />
+    </node>
+    <!-- spheres -->
+    <node shape="UnitSphere" material="red" >
+        <translate x="-1.5" y="3.5" z="-5.0" />
+    </node>
+    <node shape="UnitSphere" material="green" >
+        <translate x="-2.5" y="1.5" z="-5.0" />
+    </node>
+    <!-- mirrors -->
+    <node>
+        <translate x="0.0" y="0.0" z="-4.0" />
+        <rotate axis="z" angle="45"/>
+        <scale val="6.0" />
+        <node shape="UnitSquare" material="mirrorMat" >
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+        <node shape="UnitSquare" material="mirrorMat" >
+            <rotate axis="z" angle="180"/>
+            <rotate axis="y" angle="90"/>
+            <translate x="0.0" y="0.0" z="-0.5" />
+        </node>
+    </node>
+</scene>

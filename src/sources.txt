@@ -1,0 +1,29 @@
+Distributed raytracing
+http://web.cs.wpi.edu/~matt/courses/cs563/talks/dist_ray/dist.html
+
+Tiled noise for texture generation
+http://www.gamedev.net/blog/33/entry-2138456-seamless-noise/
+
+Poisson disc sampling algorithm O(N)
+http://www.cs.virginia.edu/~gfx/pubs/antimony/
+
+Thin lens model
+http://www.cim.mcgill.ca/~langer/557/lecture21.pdf
+
+Box ray intersection with slabs
+http://www.siggraph.org/education/materials/HyperGraph/raytrace/rtinter3.htm
+
+Environment map sampling, with mipmaps
+http://http.developer.nvidia.com/GPUGems3/gpugems3_ch20.html
+
+Celestia motherlode for Sol texture
+http://www.celestiamotherlode.net/catalog/sol.php
+
+K-D tree acceleration for raytracing
+www-i8.informatik.rwth-aachen.de/uploads/media/Raytracing-1.pdf
+
+Vertex normal interpolation
+http://www.codeproject.com/Articles/20144/Simple-Ray-Tracing-in-C-Part-VI-Vertex-Normal-Inte
+
+Consistent normal interpolation (alternative to phong)
+http://visual-computing.intel-research.net/publications/papers/2010/cni/Consistent%20Normal%20Interpolation.pdf

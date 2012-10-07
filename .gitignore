@@ -1,0 +1,14 @@
+# swap files
+*~
+*.swp
+*.swo
+# compiled files
+*.pyc
+*.o
+*.out
+# images
+#*.bmp
+# some specific files
+raytracer
+*.pdf
+*.ppt
